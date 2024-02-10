@@ -19,7 +19,7 @@ class AnimatedTitle extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Styles.primaryTextColor),
+                  color: Styles.highlightColor),
             ),
           );
         });

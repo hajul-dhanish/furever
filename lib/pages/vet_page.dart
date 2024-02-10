@@ -1,9 +1,10 @@
 import 'package:furever/models/package_details.dart';
 import 'package:furever/utils/styles.dart';
-import 'package:furever/widgets/back_button.dart';
 import 'package:furever/widgets/vet_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
+import '../widgets/base_appbar.dart';
 
 class VetPage extends StatefulWidget {
   const VetPage({Key? key}) : super(key: key);
@@ -101,66 +102,28 @@ class _VetPageState extends State<VetPage> {
         'price': 499
       },
     ];
-    return Material(
-      color: Styles.primaryBGColor,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                const Gap(100),
-                AnimatedContainer(
-                  margin: EdgeInsets.only(bottom: headerHeight == 0 ? 0 : 16),
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInExpo,
-                  width: double.infinity,
-                  height: headerHeight,
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/png/vet.png'),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: Styles.bgColor, width: 3)),
-                ),
-                Expanded(
-                  child: MediaQuery.removeViewPadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        controller: _controller,
-                        itemBuilder: (c, i) {
-                          final vp =
-                              VeterinaryDetails.fromJson(veterinaryPackage[i]);
-                          return VetCard(vp);
-                        },
-                        separatorBuilder: (c, i) {
-                          return const Gap(12);
-                        },
-                        itemCount: veterinaryPackage.length),
-                  ),
-                )
-              ],
-            ),
+    return Scaffold(
+      appBar: const BaseAppBar(title: "Pet Veterinary"),
+      backgroundColor: Styles.primaryBGColor,
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Expanded(
+          child: MediaQuery.removeViewPadding(
+            context: context,
+            removeTop: true,
+            child: ListView.separated(
+                shrinkWrap: true,
+                controller: _controller,
+                itemBuilder: (c, i) {
+                  final vp = VeterinaryDetails.fromJson(veterinaryPackage[i]);
+                  return VetCard(vp);
+                },
+                separatorBuilder: (c, i) {
+                  return const Gap(12);
+                },
+                itemCount: veterinaryPackage.length),
           ),
-          Positioned(
-            top: 50,
-            left: 15,
-            right: 15,
-            child: Row(
-              children: [
-                const PetBackButton(),
-                const Gap(20),
-                Text('Pet Veterinary',
-                    style: TextStyle(
-                        color: Styles.highlightColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18)),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

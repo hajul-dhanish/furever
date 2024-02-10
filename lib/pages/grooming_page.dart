@@ -114,9 +114,8 @@ class _GroomingPageState extends State<GroomingPage> {
                             child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                  elevation: 0,
+                                  elevation: 0, backgroundColor: Styles.highlightColor,
                                   fixedSize: Size(value * 150, value * 44),
-                                  primary: Styles.highlightColor,
                                   shape: const StadiumBorder(),
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 0),
@@ -194,9 +193,8 @@ class _GroomingPageState extends State<GroomingPage> {
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        elevation: 0,
+                        elevation: 0, backgroundColor: Styles.bgColor,
                         fixedSize: const Size(215, 44),
-                        primary: Styles.bgColor,
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 0),

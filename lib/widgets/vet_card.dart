@@ -34,7 +34,7 @@ class VetCard extends StatelessWidget {
                       Text(
                         vetItem.title,
                         style: TextStyle(
-                            color: Styles.whiteColor,
+                            color: Styles.highlightColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 17),
                       ),

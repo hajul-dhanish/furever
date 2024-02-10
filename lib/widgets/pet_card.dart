@@ -1,4 +1,3 @@
-import 'package:furever/pages/grooming_page.dart';
 import 'package:furever/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,9 +6,14 @@ import 'package:gap/gap.dart';
 class PetCard extends StatefulWidget {
   final double? height;
   final String petPath;
+  final Function() onEnter;
   final String petName;
   const PetCard(
-      {Key? key, required this.petPath, required this.petName, this.height})
+      {Key? key,
+      required this.petPath,
+      required this.petName,
+      required this.onEnter,
+      this.height})
       : super(key: key);
 
   @override
@@ -43,6 +47,7 @@ class _PetCardState extends State<PetCard> {
                     SizedBox(
                         height: 95.0 * value,
                         child: SvgPicture.asset(widget.petPath,
+                            color: Styles.highlightColor,
                             height: widget.height ?? 95)),
                     const Gap(10),
                     Text(
@@ -58,16 +63,10 @@ class _PetCardState extends State<PetCard> {
                       scale: value,
                       curve: Curves.bounceInOut,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const GroomingPage()));
-                        },
+                        onPressed: widget.onEnter,
                         style: ElevatedButton.styleFrom(
-                          elevation: 0,
+                          elevation: 0, backgroundColor: Styles.highlightColor,
                           fixedSize: const Size(90, 0),
-                          primary: Styles.highlightColor,
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 0, vertical: 0),
@@ -90,7 +89,7 @@ class _PetCardState extends State<PetCard> {
                         ),
                       ),
                     ),
-                    const Gap(5),
+                    const Gap(15),
                   ],
                 ),
               ),

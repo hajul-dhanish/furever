@@ -88,9 +88,8 @@ class PackageCard extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      elevation: 0,
+                      elevation: 0, backgroundColor: Styles.primaryBGColor,
                       fixedSize: const Size(90, 0),
-                      primary: Styles.primaryBGColor,
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 0),

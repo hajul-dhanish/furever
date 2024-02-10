@@ -9,8 +9,7 @@ class BookButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        elevation: 0,
-        primary: Styles.primaryBGColor,
+        elevation: 0, backgroundColor: Styles.primaryBGColor,
         shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
       ),

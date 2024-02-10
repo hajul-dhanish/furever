@@ -14,6 +14,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List navItems = [
+      {
+        'text': 'Home',
+        'icon': Icons.home,
+      },
+      {
+        'text': 'Notification',
+        'icon': Icons.notifications,
+      },
+      {
+        'text': 'Chat',
+        'icon': Icons.chat,
+      },
+      {
+        'text': 'Profile',
+        'icon': Icons.person,
+      },
+    ];
     final size = Layouts.getSize(context);
     return Scaffold(
       backgroundColor: Styles.primaryBGColor,
@@ -169,6 +187,47 @@ class Home extends StatelessWidget {
                 );
               }),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: 85,
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
+            color: Styles.primaryColor),
+        padding: const EdgeInsets.fromLTRB(25, 18, 25, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: navItems.map<Widget>((e) {
+            return InkWell(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    e['icon'],
+                    color: navItems.indexOf(e) == 0
+                        ? Styles.highlightColor
+                        : Styles.primaryTextColor,
+                  ),
+                  Text(
+                    e['text'],
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: navItems.indexOf(e) == 0
+                            ? Styles.highlightColor
+                            : Styles.primaryTextColor,
+                        fontWeight:
+                            navItems.indexOf(e) == 0 ? FontWeight.bold : null),
+                  )
+                ],
+              ),
+              onTap: () {
+                // if (navItems.indexOf(e) == 1 || navItems.indexOf(e) == 2) {
+                //   Navigator.push(
+                //       context, MaterialPageRoute(builder: (_) => e['page']));
+                // }
+              },
+            );
+          }).toList(),
+        ),
       ),
     );
   }

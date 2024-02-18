@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "242020444786",
+    "project_id": "project-furevr",
+    "storage_bucket": "project-furevr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242020444786:android:a20b2a53388ed3f6b270eb",
+        "android_client_info": {
+          "package_name": "com.example.furever"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeKWSIf5sc0mj0jDImsiFrENoriA6fZBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

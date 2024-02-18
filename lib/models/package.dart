@@ -1,33 +1,100 @@
-import 'dart:convert';
+class GroomModel {
+  List<Data>? data;
 
-List<Package> packageFromJson(String str) => List<Package>.from(json.decode(str).map((x) => Package.fromJson(x)));
+  GroomModel({this.data});
 
-String packageToJson(List<Package> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  GroomModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
 
-class Package {
-  Package({
-    required this.name,
-    required this.services,
-    required this.bonus,
-    required this.price,
-  });
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
 
-  final String name;
-  final int services;
-  final int bonus;
-  final int price;
+class Data {
+  String? contactNumber;
+  String? location;
+  OpeningHours? openingHours;
+  String? salonName;
+  List<String>? services;
 
-  factory Package.fromJson(Map<String, dynamic> json) => Package(
-    name: json["name"],
-    services: json["services"],
-    bonus: json["bonus"],
-    price: json["price"],
-  );
+  Data(
+      {this.contactNumber,
+      this.location,
+      this.openingHours,
+      this.salonName,
+      this.services});
 
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "services": services,
-    "bonus": bonus,
-    "price": price,
-  };
+  Data.fromJson(Map<String, dynamic> json) {
+    contactNumber = json['contact_number'];
+    location = json['location'];
+    openingHours = json['opening_hours'] != null
+        ? OpeningHours.fromJson(json['opening_hours'])
+        : null;
+    salonName = json['salon_name'];
+    services = json['services'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['contact_number'] = contactNumber;
+    data['location'] = location;
+    if (openingHours != null) {
+      data['opening_hours'] = openingHours!.toJson();
+    }
+    data['salon_name'] = salonName;
+    data['services'] = services;
+    return data;
+  }
+}
+
+class OpeningHours {
+  String? friday;
+  String? monday;
+  String? saturday;
+  String? sunday;
+  String? thursday;
+  String? tuesday;
+  String? wednesday;
+
+  OpeningHours(
+      {this.friday,
+      this.monday,
+      this.saturday,
+      this.sunday,
+      this.thursday,
+      this.tuesday,
+      this.wednesday});
+
+  OpeningHours.fromJson(Map<String, dynamic> json) {
+    friday = json['Friday'];
+    monday = json['Monday'];
+    saturday = json['Saturday'];
+    sunday = json['Sunday'];
+    thursday = json['Thursday'];
+    tuesday = json['Tuesday'];
+    wednesday = json['Wednesday'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Friday'] = friday;
+    data['Monday'] = monday;
+    data['Saturday'] = saturday;
+    data['Sunday'] = sunday;
+    data['Thursday'] = thursday;
+    data['Tuesday'] = tuesday;
+    data['Wednesday'] = wednesday;
+    return data;
+  }
 }

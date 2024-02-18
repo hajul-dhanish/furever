@@ -3,19 +3,38 @@ import 'package:furever/pages/vet_page.dart';
 import 'package:furever/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:furever/widgets/bottom_sheet.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class PackageCard extends StatelessWidget {
-  final Package package;
+  final Data package;
   const PackageCard(this.package, {Key? key}) : super(key: key);
+
+  String getOpeningDate(String curDate, OpeningHours hrs) {
+    switch (curDate) {
+      case "monday":
+        return hrs.monday!;
+      case "tuesday":
+        return hrs.tuesday!;
+      case "wednesday":
+        return hrs.wednesday!;
+      case "thursday":
+        return hrs.thursday!;
+      case "friday":
+        return hrs.friday!;
+      default:
+        return "Closed";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    String day = DateFormat('EEEE').format(DateTime.now()).toLowerCase();
+
     return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => const VetPage()));
-      },
+      onTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const VetPage())),
       child: Container(
           width: double.infinity,
           margin: const EdgeInsets.only(bottom: 8),
@@ -30,14 +49,14 @@ class PackageCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    package.name,
+                    package.salonName!,
                     style: TextStyle(
                         color: Styles.blackColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 17),
                   ),
                   Text(
-                    'Total ${package.services} Services',
+                    'Total ${package.services!.length} Services',
                     style: TextStyle(
                         color: Styles.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -45,50 +64,26 @@ class PackageCard extends StatelessWidget {
                         height: 1.5),
                   ),
                   const Gap(20),
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                          text: 'extra',
-                          style: TextStyle(
-                              color: Styles.blackColor,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              fontFamily: 'Poppins')),
-                      TextSpan(
-                        text: ' ${package.bonus}₹ ',
-                        style: TextStyle(
-                            color: Styles.primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            fontFamily: 'Poppins'),
-                      ),
-                      TextSpan(
-                        text: 'off on prepaid payment ',
-                        style: TextStyle(
-                            color: Styles.blackColor,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            fontFamily: 'Poppins'),
-                      ),
-                    ]),
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
                   Text(
-                    '₹${package.price}',
+                    getOpeningDate(day, package.openingHours!),
                     style: TextStyle(
                         color: Styles.teritaryTextColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 17),
                   ),
+                  const Gap(20),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   const Gap(10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        custBottomSheet(context, package.services!),
                     style: ElevatedButton.styleFrom(
-                      elevation: 0, backgroundColor: Styles.primaryBGColor,
+                      elevation: 0,
+                      backgroundColor: Styles.primaryBGColor,
                       fixedSize: const Size(90, 0),
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(

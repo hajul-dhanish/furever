@@ -59,13 +59,14 @@ class _PetCardState extends State<PetCard> {
                     ),
                     const Gap(5),
                     AnimatedScale(
-                      duration: const Duration(milliseconds: 800),
+                      duration: const Duration(milliseconds: 200),
                       scale: value,
                       curve: Curves.bounceInOut,
                       child: ElevatedButton(
                         onPressed: widget.onEnter,
                         style: ElevatedButton.styleFrom(
-                          elevation: 0, backgroundColor: Styles.highlightColor,
+                          elevation: 0,
+                          backgroundColor: Styles.highlightColor,
                           fixedSize: const Size(90, 0),
                           shape: const StadiumBorder(),
                           padding: const EdgeInsets.symmetric(

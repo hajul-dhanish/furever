@@ -4,7 +4,6 @@ import 'package:furever/utils/layouts.dart';
 import 'package:furever/utils/styles.dart';
 import 'package:furever/widgets/animated_title.dart';
 import 'package:furever/widgets/pet_card.dart';
-import 'package:furever/widgets/stories_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -77,10 +76,10 @@ class Home extends StatelessWidget {
                   ),
                 );
               }),
-          const Gap(25),
-          const AnimatedTitle(title: 'Stories'),
-          const Gap(10),
-          const StoriesSection(),
+          // const Gap(25),
+          // const AnimatedTitle(title: 'Stories'),
+          // const Gap(10),
+          // const StoriesSection(),
           const Gap(25),
           const AnimatedTitle(title: 'Who are you looking for?'),
           const Gap(10),
